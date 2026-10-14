@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Avaliação disciplina automação de teste de software</title>
+<style>
+  :root { --roxo:#5b2a86; --claro:#f3ecfa; --verde:#1f8a5b; }
+  * { box-sizing:border-box; font-family:"Segoe UI", Arial, sans-serif; }
+  body { margin:0; background:linear-gradient(135deg,#efe4fb,#dff3ea); min-height:100vh; padding:32px 16px; }
+  .cartao { max-width:640px; margin:0 auto; background:#fff; border-radius:16px; box-shadow:0 8px 28px rgba(60,20,90,.18); overflow:hidden; }
+  header { background:var(--roxo); color:#fff; padding:22px 28px; }
+  header h1 { margin:0; font-size:1.35rem; line-height:1.3; }
+  header p { margin:6px 0 0; opacity:.85; font-size:.9rem; }
+  form { padding:24px 28px 30px; }
+  .campo { margin-bottom:18px; }
+  label, legend { display:block; font-weight:600; margin-bottom:6px; color:#3b2552; }
+  .opcional { font-weight:400; color:#888; font-size:.85rem; }
+  input[type=text], select, textarea { width:100%; padding:10px 12px; border:1.5px solid #cbb8de; border-radius:8px; font-size:1rem; background:#fff; }
+  input:focus, select:focus, textarea:focus { outline:none; border-color:var(--roxo); box-shadow:0 0 0 3px var(--claro); }
+  textarea { resize:vertical; min-height:80px; }
+  .data { display:flex; gap:10px; }
+  .data select { flex:1; }
+  button { width:100%; padding:13px; border:0; border-radius:10px; background:var(--verde); color:#fff; font-size:1.05rem; font-weight:700; cursor:pointer; }
+  button:hover { filter:brightness(1.08); }
+  #mensagem { display:none; margin-top:18px; padding:14px; border-radius:10px; background:#e3f6ec; color:#14573a; font-weight:600; text-align:center; }
+</style>
+</head>
+<body>
+<div class="cartao">
+  <header>
+    <h1 id="titulo">Avaliação disciplina automação de teste de software</h1>
+    <p>Sua opinião ajuda a melhorar as próximas turmas</p>
+  </header>
+
+  <form id="form-avaliacao" name="avaliacao">
+    <div class="campo">
+      <label for="nome">Nome</label>
+      <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo">
+    </div>
+
+    <div class="campo">
+      <label for="ra">RA</label>
+      <input type="text" id="ra" name="ra" placeholder="Digite seu RA">
+    </div>
+
+    <div class="campo">
+      <label>Data de nascimento</label>
+      <div class="data">
+        <select id="dia" name="dia">
+          <option value="">Dia</option>
+        </select>
+        <select id="mes" name="mes">
+          <option value="">Mês</option>
+          <option value="1">Janeiro</option><option value="2">Fevereiro</option>
+          <option value="3">Março</option><option value="4">Abril</option>
+          <option value="5">Maio</option><option value="6">Junho</option>
+          <option value="7">Julho</option><option value="8">Agosto</option>
+          <option value="9">Setembro</option><option value="10">Outubro</option>
+          <option value="11">Novembro</option><option value="12">Dezembro</option>
+        </select>
+        <select id="ano" name="ano">
+          <option value="">Ano</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="campo">
+      <label for="curso">Curso</label>
+      <select id="curso" name="curso">
+        <option value="">Selecione o curso</option>
+        <option value="ads">Análise e desenvolvimento de Sistemas</option>
+        <option value="si">Sistemas de Informação</option>
+      </select>
+    </div>
+
+    <div class="campo">
+      <label for="aproveitamento">Aproveitamento do conteúdo (0 a 10)</label>
+      <select id="aproveitamento" name="aproveitamento">
+        <option value="">Selecione uma nota</option>
+      </select>
+    </div>
+
+    <div class="campo">
+      <label for="sugestoes">Sugestões de melhoria para as próximas turmas</label>
+      <textarea id="sugestoes" name="sugestoes" placeholder="O que poderia melhorar?"></textarea>
+    </div>
+
+    <div class="campo">
+      <label for="observacoes">Observações <span class="opcional">(não obrigatório)</span></label>
+      <textarea id="observacoes" name="observacoes" placeholder="Algo mais que queira comentar?"></textarea>
+    </div>
+
+    <button type="submit" id="btn-enviar" class="botao-enviar">Enviar Feedback</button>
+    <div id="mensagem">Feedback enviado com sucesso! Obrigado pela avaliação.</div>
+  </form>
+</div>
+
+<script>
+  // Preenche dias, anos e notas
+  const dia = document.getElementById("dia");
+  for (let d = 1; d <= 31; d++) dia.add(new Option(d, d));
+
+  const ano = document.getElementById("ano");
+  for (let a = 2012; a >= 1950; a--) ano.add(new Option(a, a));
+
+  const nota = document.getElementById("aproveitamento");
+  for (let n = 0; n <= 10; n++) nota.add(new Option(n, n));
+
+  // Sem banco de dados: apenas mostra a confirmação na tela
+  document.getElementById("form-avaliacao").addEventListener("submit", function (e) {
+    e.preventDefault();
+    document.getElementById("mensagem").style.display = "block";
+  });
+</script>
+</body>
+</html>
